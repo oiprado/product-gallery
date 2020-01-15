@@ -1,0 +1,36 @@
+---
+spring:
+  profiles: developer
+  datasource:
+    url: jdbc:mysql://localhost:3306/product_gallery?zeroDateTimeBehavior=convertToNull
+    username: quipu
+    password: admin
+    driver-class-name:  com.mysql.cj.jdbc.Driver # com.mysql.jdbc.Driver
+    tomcat:
+      initial-size: 10
+      max-idle: 60
+      min-idle: 10
+      max-active: 80
+      test-while-idle: true
+      validation-query: SELECT 1
+      test-on-borrow: false
+      time-between-eviction-runs-millis: 30000
+      min-evictable-idle-time-millis: 1800000
+      num-tests-per-eviction-run: 10
+      remove-abandoned: true
+      remove-abandoned-timeout: 180
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+cron:
+  userAccountServiceImpl:
+    credentialExpiredUsers: 0 03 15 ? * ?
+#      mappingResources:
+#        - META-INF/repository/GroupRepository.xml
+
+check-user-scopes: true

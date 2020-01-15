@@ -1,0 +1,33 @@
+server:
+  servlet:
+    context-path: /com.perfiltic.oiprado.${spring.profiles.active}
+  port: 8081
+spring:
+  profiles:
+    active: developer # test server configuration
+  application: 
+    name: com.perfiltic.oiprado.${spring.profiles.active}
+  jmx:
+    default-domain: com.perfiltic.oiprado
+  main:
+    allow-bean-definition-overriding: true
+logging:
+  file: logs/${spring.profiles.active}.log
+  pattern:
+      file: "%d %-5level [%thread] %logger{0} : %msg%n"
+  level:
+    org.springframework.web: DEBUG
+    guru.springframework.controllers: DEBUG
+#    org.hibernate: DEBUG
+    org.springframework.security.oauth2: debug
+swagger:
+  title: PerfilTIC
+  description: PerfilTIC Test
+  version: 1.0.0
+  termsOfServiceUrl: Terms of service
+  license: License of API
+  licenseUrl: API license URL
+  contact:
+    name: Develope area
+    url: www.trinity.dev.com
+    email: oiprado@gmail.com
