@@ -3,24 +3,6 @@
   <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <mapping-file>
-        META-INF/repository/GroupRepository.xml
-    </mapping-file>
-    <mapping-file>
-        META-INF/repository/OptionRepository.xml
-    </mapping-file>
-    <mapping-file>
-        META-INF/repository/ProfileRepository.xml
-    </mapping-file>
-    <mapping-file>
-        META-INF/repository/RoleRepository.xml
-    </mapping-file>
-    <mapping-file>
-        META-INF/repository/UserAccountRepository.xml
-    </mapping-file>
-    <mapping-file>
-        META-INF/repository/GroupProfileRepository.xml
-    </mapping-file>
     <validation-mode>NONE</validation-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/quipu_security?zeroDateTimeBehavior=convertToNull"/>
