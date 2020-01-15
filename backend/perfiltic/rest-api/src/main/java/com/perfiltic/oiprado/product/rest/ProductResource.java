@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author oiprado
  */
 @RestController
-@RequestMapping(path = "/api/product-managment")
+@RequestMapping("/api/product-managment")
 public class ProductResource {
     
     @Autowired
