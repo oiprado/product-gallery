@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author oiprado
  */
-@RequestMapping("/api/category-managment")
+@RequestMapping("/admin/category-managment")
 @RestController
 public class CategoryResource {
 

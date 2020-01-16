@@ -27,10 +27,4 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
-cron:
-  userAccountServiceImpl:
-    credentialExpiredUsers: 0 03 15 ? * ?
-#      mappingResources:
-#        - META-INF/repository/GroupRepository.xml
-
 check-user-scopes: true
