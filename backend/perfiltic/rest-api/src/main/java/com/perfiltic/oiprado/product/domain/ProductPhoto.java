@@ -5,6 +5,7 @@
  */
 package com.perfiltic.oiprado.product.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -41,6 +42,7 @@ public class ProductPhoto implements Serializable {
     @Lob
     @Column(name = "image")
     private String image;
+    @JsonIgnore
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @ManyToOne
     private Product productId;

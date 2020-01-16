@@ -5,6 +5,7 @@
  */
 package com.perfiltic.oiprado.category.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -47,8 +48,10 @@ public class Category implements Serializable {
     @Lob
     @Column(name = "image")
     private String image;
+    @JsonIgnore
     @OneToMany(mappedBy = "parentId")
     private List<Category> categoryList;
+    @JsonIgnore
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     @ManyToOne
     private Category parentId;

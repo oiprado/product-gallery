@@ -5,6 +5,7 @@
  */
 package com.perfiltic.oiprado.product.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.perfiltic.oiprado.category.domain.Category;
 import java.io.Serializable;
 import java.util.List;
@@ -51,6 +52,7 @@ public class Product implements Serializable {
     private String description;
     @Column(name = "price")
     private Integer price;
+    @JsonIgnore
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne
     private Category categoryId;
