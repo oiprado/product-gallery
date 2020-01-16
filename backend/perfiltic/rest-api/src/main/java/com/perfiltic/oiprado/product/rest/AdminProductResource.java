@@ -27,41 +27,20 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author oiprado
  */
 @RestController
-@RequestMapping("/api/product-managment")
-public class ProductResource {
+@RequestMapping("/admin/product-managment")
+public class AdminProductResource {
 
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<Product> getProducts(@RequestParam Map<String, String> parameters) {
-
-        Pageable pageable;
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity create(@RequestBody com.perfiltic.oiprado.product.dto.Product product) {
         try {
-
-            int page = parameters.containsKey("page") ? Integer.parseInt(parameters.get("page")) : 0;
-            int size = parameters.containsKey("size") ? Integer.parseInt(parameters.get("size")) : 0;
-            String sort = parameters.containsKey("sort") ? parameters.get("sort") : null;
-
-            Sort sortClause = null;
-            if (sort != null) {
-                if (parameters.containsKey("direction") && parameters.get("direction").equals("desc")) {
-                    sortClause = Sort.by(sort).descending();
-                } else {
-                    sortClause = Sort.by(sort).ascending();
-                }
-            }
-
-            if (sortClause != null) {
-                pageable = PageRequest.of(page, size, sortClause);
-            } else {
-                pageable = PageRequest.of(page, size);
-            }
-
-        } catch (NumberFormatException ex) {
-            pageable = PageRequest.of(0, 0);
+            return new ResponseEntity(productService.create(product), HttpStatus.OK);
+        }catch(Exception e) {
+            return new ResponseEntity(new MessageError(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
-        return productService.getProducts(parameters, pageable);
+        
     }
 
     @RequestMapping(method = RequestMethod.PUT)
