@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-
+import { CategoryService } from '../../services/category.service'
 @Component({
   selector: 'header-section',
   templateUrl: './header.component.html',
@@ -8,48 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  categories = [
-    {
-        "id": 1,
-        "name": "Celulares",
-        "categories": [
-            {
-                "id": 2,
-                "name": "Accesorios",
-                "categories": [
-                    {
-                        "id": 7,
-                        "name": "Forros para celulares",
-                        "categories": []
-                    }
-                ]
-            },
-            {
-                "id": 3,
-                "name": "Celulares y Teléfonos",
-                "categories": [
-                    {
-                        "id": 5,
-                        "name": "Celular Huawei",
-                        "categories": []
-                    },
-                    {
-                        "id": 6,
-                        "name": "iPhone",
-                        "categories": []
-                    }
-                ]
-            },
-            {
-                "id": 4,
-                "name": "Wearables",
-                "categories": []
-            }
-        ]
-    }
-];
+
+    constructor(private _CategoryService: CategoryService) { }
+
+  categories;
 
     ngOnInit(): void {
-        
+        this._CategoryService.getCategoryList().subscribe((response: any) => {
+            this.categories = response;
+        })        
     }
 }

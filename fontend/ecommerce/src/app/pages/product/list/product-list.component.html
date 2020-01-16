@@ -1,5 +1,5 @@
-  <!-- Start Category Area -->
-  <section class="htc__category__area ptb--100">
+<!-- Start Category Area -->
+<section class="htc__category__area ptb--100">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
@@ -11,30 +11,53 @@
         </div>
         <div class="htc__product__container">
             <div class="row">
+                <div class="clearfix">
+                    <!-- <div class="float-right">  -->
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="" for="orderBy">Order by</label>
+                                <select class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-default">Clear Filter</button>
+                        </div>
+                    </div>
+                <!-- </div> -->
+                </div>
                 <div class="product__list clearfix mt--30">
                     <!-- Start Single Category -->
-                    <div *ngFor = "let product of products" class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
+                    <div *ngFor="let product of products" class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
                         <div class="category">
                             <div class="ht__cat__thumb">
                                 <a href="product-details.html">
-                                    <img [src]="product.productPhotoList[0].image" alt="product images">
+                                    
                                 </a>
-                            </div>
-                            <div class="fr__hover__info">
-                                <ul class="product__action">
-                                    <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                    <ol  class="carousel-indicators">
+                                      <li *ngFor = "let productImage of  product.productPhotoList; let i = index" data-target="#myCarousel" [attr.data-slide-to]="i" [className]="i === 0 ? 'active' : ''"></li >
+                                    </ol>
+                                    <div class="carousel-inner">
 
-                                    <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-                                    <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                </ul>
+                                      <div *ngFor = "let productImage of  product.productPhotoList; let i = index" class="item" [className]="i === 0 ? 'item active' : 'item'">
+                                        <img [src]="productImage.image" alt="product images">
+                                      </div>
+                                  
+                                    </div>
+                                  
+                                  </div>
                             </div>
                             <div class="fr__product__inner">
                                 <h4><a href="product-details.html">{{product.name}}</a></h4>
                                 <ul class="fr__pro__prize">
                                     <li>{{product.price | currency}}</li>
                                 </ul>
-                                <a [innerHTML] ="product.description" ></a>
+                                <a [innerHTML]="product.description"></a>
                             </div>
                         </div>
                     </div>

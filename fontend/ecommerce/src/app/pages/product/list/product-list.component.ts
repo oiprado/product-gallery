@@ -1,5 +1,6 @@
 
 import { Component, OnInit, Input } from '@angular/core';
+import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
   selector: 'product-list',
@@ -8,6 +9,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
     
+
+    constructor(private _ProductService: ProductService) {
+        
+    }
+
     products = [
         {
             "id": 3,
@@ -48,6 +54,15 @@ export class ProductListComponent implements OnInit {
     ];
 
     ngOnInit(): void {
-        
+        this._ProductService.getProductList({
+            direction: "asc",
+            page:0,
+            size:10,
+            sort: "name"
+        }).subscribe((response: any) => {
+            this.products = response;
+            console.log(response);
+        });
     }
+
 }
