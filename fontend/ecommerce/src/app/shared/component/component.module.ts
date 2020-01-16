@@ -3,6 +3,8 @@ import { CategoryComponent } from './category/category.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
  
 @NgModule({
     declarations: [
@@ -17,7 +19,9 @@ import { CommonModule } from '@angular/common';
     ]
     ,
     imports: [
-      CommonModule
+      CommonModule,
+      FormsModule,
+      RouterModule
     ],
     providers: []
   })

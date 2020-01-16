@@ -1,7 +1,7 @@
 export interface ProductPageable {
     page: number;
     size: number;
-    categori? :number;
+    category? :number;
     sort: string;
     direction:string;
 }

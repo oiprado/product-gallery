@@ -4,10 +4,10 @@
     <div id="sticky-header-with-topbar" class="mainmenu__wrap sticky__header">
         <div class="container">
             <div class="row">
-                <div class="menumenu__container clearfix">
-                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5"> 
+                <div class="menu menu__container clearfix">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5">
                         <div class="logo">
-                             <a href="index.html"><img src="/assets/images/logo/4.png" alt="logo images"></a>
+                            <a href="index.html"><img src="/assets/images/logo/4.png" alt="logo images"></a>
                         </div>
                     </div>
                     <div class="col-md-7 col-lg-8 col-sm-5 col-xs-3">
@@ -16,43 +16,66 @@
                                 <li class="drop"><a href="index.html">Home</a></li>
                                 <li *ngFor="let category of categories" class="drop">
                                     <a href="#">{{category.name}}</a>
-                            
+
                                     <ul class="dropdown mega_dropdown">
                                         <!-- Start Single Mega MEnu -->
                                         <li *ngFor="let secondChild of category.categories">
                                             <a class="mega__title" href="product-grid.html">{{secondChild.name}}</a>
                                             <ul class="mega__item">
                                                 <li *ngFor="let thirdChild of secondChild.categories">
-                                                    <a href="product-grid.html">{{thirdChild.name}}</a>
+                                                    <a [routerLink] = "['/list']" [queryParams] = "{ category: this.thirdChild.id     , page:0, size: 10, sort: 'name', direction:'asc'}" > {{thirdChild.name}} </a>
                                                 </li>
                                             </ul>
                                         </li>
                                         <!-- End Single Mega MEnu -->
                                     </ul>
-
                                 </li>
-                                <li class="drop"><a >Add Product</a></li>
+                                
+                                <li *ngIf="_TokenService.authenticated"  class="drop">
+                                    <a [routerLink] = "['/create-product']" >Add Product</a>
+                                </li>
+                                <li class="drop">
+                                    <a>Login</a>
+                                    <ul class="dropdown mega_dropdown">
+                                        <li>
+                                            <div class="row" *ngIf="!_TokenService.authenticated">
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control"
+                                                            [(ngModel)]="model.username" placeholder="Username">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <input type="password" class="form-control"
+                                                            [(ngModel)]="model.password" placeholder="Password">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <input type="button" value="login"
+                                                            class="btn btn-default btn-header-login" (click)="login()">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="_TokenService.authenticated" class="row">
+                                                <button class="btn btn-default btn-header-login" (click)="logout()">Log Out</button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </nav>
 
                     </div>
                     <div class="col-md-3 col-lg-2 col-sm-4 col-xs-4">
                         <div class="header__right">
-                            <div class="header__search search search__open">
-                                <a href="#"><i class="icon-magnifier icons"></i></a>
-                            </div>
-                            <div class="header__account">
-                                <a href="#"><i class="icon-user icons"></i></a>
-                            </div>
-                            <div class="htc__shopping__cart">
-                                <a class="cart__menu" href="#"><i class="icon-handbag icons"></i></a>
-                                <a href="#"><span class="htc__qua">2</span></a>
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="mobile-menu-area"></div>
+            <!-- <div class="mobile-menu-area"></div> -->
         </div>
     </div>
     <!-- End Mainmenu Area -->
