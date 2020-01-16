@@ -6,7 +6,8 @@
 package com.perfiltic.oiprado.product.repository;
 
 import com.perfiltic.oiprado.product.domain.Product;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,6 +15,6 @@ import org.springframework.stereotype.Repository;
  * @author oiprado
  */
 @Repository
-public interface ProductRepository extends CrudRepository<Product, Long>{
+public interface ProductRepository extends PagingAndSortingRepository<Product, Long>, JpaSpecificationExecutor{
     
 }

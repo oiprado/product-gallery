@@ -7,6 +7,8 @@ package com.perfiltic.oiprado.product.service;
 
 import com.perfiltic.oiprado.product.domain.Product;
 import java.util.List;
+import java.util.Map;
+import org.springframework.data.domain.Pageable;
 
 /**
  *
@@ -14,6 +16,6 @@ import java.util.List;
  */
 public interface ProductService {
     
-    public List<Product> getProducts();
+    public List<Product> getProducts(Map<String, String> parameters, Pageable pageable);
     
 }
