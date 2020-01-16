@@ -6,9 +6,12 @@ import { AppComponent } from './app.component';
 import { ComponentModule } from './shared/component/component.module';
 import { CommonModule } from '@angular/common';
 
+import { ProductListComponent } from './pages/product/list/product-list.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,

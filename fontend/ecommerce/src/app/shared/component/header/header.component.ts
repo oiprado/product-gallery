@@ -16,7 +16,13 @@ export class HeaderComponent implements OnInit {
             {
                 "id": 2,
                 "name": "Accesorios",
-                "categories": []
+                "categories": [
+                    {
+                        "id": 7,
+                        "name": "Forros para celulares",
+                        "categories": []
+                    }
+                ]
             },
             {
                 "id": 3,
