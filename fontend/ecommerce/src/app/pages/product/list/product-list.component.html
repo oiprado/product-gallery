@@ -28,36 +28,39 @@
                             <button type="submit" class="btn btn-default">Clear Filter</button>
                         </div>
                     </div>
-                <!-- </div> -->
+                    <!-- </div> -->
                 </div>
-                <div class="product__list clearfix mt--30">
+                <div class="product__list clearfix mt--30" style="position: relative; height: 0px;">
                     <!-- Start Single Category -->
                     <div *ngFor="let product of products" class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
                         <div class="category">
                             <div class="ht__cat__thumb">
-                                <a href="product-details.html">
+                                <!-- <a href="product-details.html">
                                     
-                                </a>
+                                </a> -->
                                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                    <ol  class="carousel-indicators">
-                                      <li *ngFor = "let productImage of  product.productPhotoList; let i = index" data-target="#myCarousel" [attr.data-slide-to]="i" [className]="i === 0 ? 'active' : ''"></li >
+                                    <ol class="carousel-indicators">
+                                        <li *ngFor="let productImage of  product.productPhotoList; let i = index"
+                                            data-target="#myCarousel" [attr.data-slide-to]="i"
+                                            [className]="i === 0 ? 'active' : ''"></li>
                                     </ol>
                                     <div class="carousel-inner">
 
-                                      <div *ngFor = "let productImage of  product.productPhotoList; let i = index" class="item" [className]="i === 0 ? 'item active' : 'item'">
-                                        <img [src]="productImage.image" alt="product images">
-                                      </div>
-                                  
+                                        <div *ngFor="let productImage of  product.productPhotoList; let i = index"
+                                            class="item" [className]="i === 0 ? 'item active' : 'item'">
+                                            <img [src]="productImage.image" alt="product images">
+                                        </div>
+
                                     </div>
-                                  
-                                  </div>
+
+                                </div>
                             </div>
                             <div class="fr__product__inner">
                                 <h4><a href="product-details.html">{{product.name}}</a></h4>
                                 <ul class="fr__pro__prize">
                                     <li>{{product.price | currency}}</li>
                                 </ul>
-                                <a [innerHTML]="product.description"></a>
+                                <!-- <a [innerHTML]="product.description"></a> -->
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,7 @@
  */
 package com.perfiltic.oiprado.product.rest;
 
+import com.perfiltic.oiprado.common.MessageError;
 import com.perfiltic.oiprado.product.domain.Product;
 import com.perfiltic.oiprado.product.service.ProductService;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,8 +65,13 @@ public class ProductResource {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity create() {
-        return new ResponseEntity(HttpStatus.CREATED);
+    public ResponseEntity create(@RequestBody com.perfiltic.oiprado.product.dto.Product product) {
+        try {
+            return new ResponseEntity(productService.create(product), HttpStatus.OK);
+        }catch(Exception e) {
+            return new ResponseEntity(new MessageError(e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+        
     }
 
     @RequestMapping(method = RequestMethod.PUT)

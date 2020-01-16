@@ -6,7 +6,13 @@
 package com.perfiltic.oiprado.product.service.impl;
 
 import com.perfiltic.oiprado.category.domain.Category;
+import com.perfiltic.oiprado.category.repository.CategoryRepository;
+import com.perfiltic.oiprado.exception.ActionNotAllowedException;
+import com.perfiltic.oiprado.exception.EntityNotFoundException;
 import com.perfiltic.oiprado.product.domain.Product;
+import com.perfiltic.oiprado.product.domain.ProductPhoto;
+import com.perfiltic.oiprado.product.dto.Photo;
+import com.perfiltic.oiprado.product.repository.ProductPhotoRepository;
 import com.perfiltic.oiprado.product.repository.ProductRepository;
 import com.perfiltic.oiprado.product.service.ProductService;
 import java.util.ArrayList;
@@ -21,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -31,18 +38,22 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private ProductPhotoRepository productPhotoRepository;
 
     @Override
     public List<Product> getProducts(Map<String, String> parameters, Pageable pageable) {
 
         Specification<Product> specification = (Root<Product> root, CriteriaQuery<?> cq, CriteriaBuilder cb) -> {
             List<Predicate> predicates = new ArrayList<>();
-            
-            if(parameters.containsKey("category")) {
+
+            if (parameters.containsKey("category")) {
                 Join<Product, Category> categories = root.join("categoryId");
                 predicates.add(cb.equal(categories.get("id"), parameters.get("category")));
             }
-            
+
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));
         };
 
@@ -52,6 +63,48 @@ public class ProductServiceImpl implements ProductService {
         source.forEach(target::add);
 
         return target;
+    }
+
+    @Transactional
+    @Override
+    public Product create(com.perfiltic.oiprado.product.dto.Product product) {
+        Category category;
+        try {
+            category = categoryRepository.findById(product.getCategoryId()).get();
+        } catch (Exception exception) {
+            throw new EntityNotFoundException("Category not found");
+        }
+
+        if (!category.getCategoryList().isEmpty()) {
+            throw new ActionNotAllowedException("The product can not be created becouse the category has childs");
+        }
+        
+        if(product.getPhotos().isEmpty()) {
+            throw new ActionNotAllowedException("The product can not be created becouse does not containt photos");
+        }
+        
+        Product create = new Product();
+        create.setCategoryId(category);
+        create.setName(product.getName());
+        create.setDescription(product.getDescription());
+        create.setPrice(product.getPrice());
+        
+        List<ProductPhoto> productPhotos = new ArrayList<>();
+        
+        for (Photo photo : product.getPhotos()) {
+            
+            ProductPhoto productPhoto = new ProductPhoto();
+            productPhoto.setImage(photo.getImage());
+            productPhoto.setProductId(create);
+            
+            productPhotos.add(productPhoto);
+        }
+        
+        productRepository.save(create);
+        productPhotoRepository.saveAll(productPhotos);
+        
+        return create;
+
     }
 
 }

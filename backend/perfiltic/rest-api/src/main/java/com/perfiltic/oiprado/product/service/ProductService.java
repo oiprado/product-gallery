@@ -18,4 +18,5 @@ public interface ProductService {
     
     public List<Product> getProducts(Map<String, String> parameters, Pageable pageable);
     
+    public Product create(com.perfiltic.oiprado.product.dto.Product product);
 }
