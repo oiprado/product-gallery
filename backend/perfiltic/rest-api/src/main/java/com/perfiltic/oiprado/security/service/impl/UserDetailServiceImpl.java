@@ -5,7 +5,6 @@
  */
 package com.perfiltic.oiprado.security.service.impl;
 
-//import com.trinity.dev.oauth.domain.Authority;
 import com.perfiltic.oiprado.oauth.domain.UserAccount;
 import com.perfiltic.oiprado.security.repository.UserAccountRepository;
 import java.util.Collection;

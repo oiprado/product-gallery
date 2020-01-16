@@ -15,6 +15,6 @@ import org.springframework.stereotype.Repository;
  * @author oiprado
  */
 @Repository
-public interface ProductRepository extends PagingAndSortingRepository<Product, Long>, JpaSpecificationExecutor{
-    
+public interface ProductRepository extends PagingAndSortingRepository<Product, Long>, JpaSpecificationExecutor {
+
 }

@@ -48,7 +48,7 @@ public class ProductResource {
                 } else {
                     sortClause = Sort.by(sort).ascending();
                 }
-            }
+            }   
 
             if (sortClause != null) {
                 pageable = PageRequest.of(page, size, sortClause);

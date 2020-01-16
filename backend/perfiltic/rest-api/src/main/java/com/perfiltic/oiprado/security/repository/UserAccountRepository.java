@@ -5,7 +5,6 @@
  */
 package com.perfiltic.oiprado.security.repository;
 
-
 import com.perfiltic.oiprado.oauth.domain.UserAccount;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -15,10 +14,8 @@ import org.springframework.stereotype.Repository;
  * @author oiprado
  */
 @Repository
-public interface UserAccountRepository extends PagingAndSortingRepository<UserAccount, Long>{
-    
+public interface UserAccountRepository extends PagingAndSortingRepository<UserAccount, Long> {
+
     public UserAccount findOneByUserName(String userName);
-    
-    
-    
+
 }

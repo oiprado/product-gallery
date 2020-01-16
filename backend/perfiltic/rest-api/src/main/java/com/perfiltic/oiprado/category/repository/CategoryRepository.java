@@ -16,12 +16,12 @@ import org.springframework.stereotype.Repository;
  * @author oiprado
  */
 @Repository
-public interface CategoryRepository extends CrudRepository<Category, Integer>{
+public interface CategoryRepository extends CrudRepository<Category, Integer> {
 
     @Query("SELECT c FROM Category c where c.parentId is null")
     public List<Category> getCategoriesWhenParentNull();
-    
+
     @Query("SELECT c FROM Category c where c.parentId.id = :id")
     public List<Category> getCategoresByParentId();
-    
+
 }

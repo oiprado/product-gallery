@@ -7,8 +7,6 @@ package com.perfiltic.oiprado.security;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-//import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -63,9 +61,9 @@ public class OAuthConfigurer extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
         oauthServer
-            .tokenKeyAccess("permitAll()")
-            .checkTokenAccess("permitAll()").passwordEncoder(oauthClientPasswordEncoder);
-            
+                .tokenKeyAccess("permitAll()")
+                .checkTokenAccess("permitAll()").passwordEncoder(oauthClientPasswordEncoder);
+
     }
 
     @Override
@@ -76,9 +74,9 @@ public class OAuthConfigurer extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
-            .tokenStore(tokenStore())
-            .authenticationManager(authenticationManager)
-            .userDetailsService(userDetailsService);
+                .tokenStore(tokenStore())
+                .authenticationManager(authenticationManager)
+                .userDetailsService(userDetailsService);
     }
-    
+
 }

@@ -15,5 +15,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ProductPhotoRepository extends CrudRepository<ProductPhoto, Long> {
-    
+
 }

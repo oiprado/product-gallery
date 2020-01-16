@@ -105,5 +105,5 @@ public class UserAccount implements Serializable {
     public String toString() {
         return "com.perfiltic.oiprado.oauth.domain.UserAccount[ id=" + id + " ]";
     }
-    
+
 }

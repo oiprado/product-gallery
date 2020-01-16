@@ -5,7 +5,6 @@
  */
 package com.perfiltic.oiprado.category.service;
 
-import com.perfiltic.oiprado.category.domain.Category;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ import java.util.List;
  * @author oiprado
  */
 public interface CategoryService {
-    
+
     public List<com.perfiltic.oiprado.category.dto.Category> getCategories();
-    
+
 }

@@ -78,31 +78,31 @@ public class ProductServiceImpl implements ProductService {
         if (!category.getCategoryList().isEmpty()) {
             throw new ActionNotAllowedException("The product can not be created becouse the category has childs");
         }
-        
-        if(product.getPhotos().isEmpty()) {
+
+        if (product.getPhotos().isEmpty()) {
             throw new ActionNotAllowedException("The product can not be created becouse does not containt photos");
         }
-        
+
         Product create = new Product();
         create.setCategoryId(category);
         create.setName(product.getName());
         create.setDescription(product.getDescription());
         create.setPrice(product.getPrice());
-        
+
         List<ProductPhoto> productPhotos = new ArrayList<>();
-        
+
         for (Photo photo : product.getPhotos()) {
-            
+
             ProductPhoto productPhoto = new ProductPhoto();
             productPhoto.setImage(photo.getImage());
             productPhoto.setProductId(create);
-            
+
             productPhotos.add(productPhoto);
         }
-        
+
         productRepository.save(create);
         productPhotoRepository.saveAll(productPhotos);
-        
+
         return create;
 
     }

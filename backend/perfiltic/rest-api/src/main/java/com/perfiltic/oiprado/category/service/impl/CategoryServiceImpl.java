@@ -26,9 +26,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<com.perfiltic.oiprado.category.dto.Category> getCategories() {
 
-//        Iterable<Category> source = categoryRepository.getCategoriesWhenParentNull();
-//        List<Category> target = new ArrayList<>();
-//        source.forEach(target::add);
         List<Category> parents = categoryRepository.getCategoriesWhenParentNull();
 
         List<com.perfiltic.oiprado.category.dto.Category> tmpCategories = new ArrayList<>();
