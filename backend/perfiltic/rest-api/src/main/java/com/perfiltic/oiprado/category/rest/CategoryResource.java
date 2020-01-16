@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author oiprado
  */
-@RequestMapping("/admin/category-managment")
+@RequestMapping("/api/category-managment")
 @RestController
 public class CategoryResource {
 
