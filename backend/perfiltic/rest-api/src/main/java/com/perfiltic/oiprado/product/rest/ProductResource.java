@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,6 +60,21 @@ public class ProductResource {
             pageable = PageRequest.of(0, 0);
         }
         return productService.getProducts(parameters, pageable);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity create() {
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity update() {
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity delete() {
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
 }

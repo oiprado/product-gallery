@@ -6,6 +6,8 @@
 package com.perfiltic.oiprado.category.repository;
 
 import com.perfiltic.oiprado.category.domain.Category;
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +17,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CategoryRepository extends CrudRepository<Category, Integer>{
+
+    @Query("SELECT c FROM Category c where c.parentId is null")
+    public List<Category> getCategoriesWhenParentNull();
+    
+    @Query("SELECT c FROM Category c where c.parentId.id = :id")
+    public List<Category> getCategoresByParentId();
     
 }

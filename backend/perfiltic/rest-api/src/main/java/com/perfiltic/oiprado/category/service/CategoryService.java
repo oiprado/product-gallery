@@ -14,6 +14,6 @@ import java.util.List;
  */
 public interface CategoryService {
     
-    public List<Category> getCategories();
+    public List<com.perfiltic.oiprado.category.dto.Category> getCategories();
     
 }

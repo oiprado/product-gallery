@@ -22,15 +22,46 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;
-    
-    @Override
-    public List getCategories() {
-        
-        Iterable<Category> source = categoryRepository.findAll();
-        List<Category> target = new ArrayList<>();
-        source.forEach(target::add);
 
-        return target;
+    @Override
+    public List<com.perfiltic.oiprado.category.dto.Category> getCategories() {
+
+//        Iterable<Category> source = categoryRepository.getCategoriesWhenParentNull();
+//        List<Category> target = new ArrayList<>();
+//        source.forEach(target::add);
+        List<Category> parents = categoryRepository.getCategoriesWhenParentNull();
+
+        List<com.perfiltic.oiprado.category.dto.Category> tmpCategories = new ArrayList<>();
+
+        for (Category parent : parents) {
+            com.perfiltic.oiprado.category.dto.Category tmpCategory = new com.perfiltic.oiprado.category.dto.Category(
+                parent.getId(),
+                parent.getName()
+            );
+
+            tmpCategories.add(tmpCategory);
+
+            exploreChilds(parent.getCategoryList(), tmpCategory);
+        }
+
+        return tmpCategories;
     }
-    
+
+    private void exploreChilds(List<Category> categories, com.perfiltic.oiprado.category.dto.Category tmpCategory) {
+
+        if (categories == null) {
+            return;
+        }
+
+        for (Category category : categories) {
+            com.perfiltic.oiprado.category.dto.Category parent = new com.perfiltic.oiprado.category.dto.Category(
+                category.getId(),
+                category.getName()
+            );
+            tmpCategory.getCategories().add(parent);
+            exploreChilds(category.getCategoryList(), parent);
+        }
+
+    }
+
 }

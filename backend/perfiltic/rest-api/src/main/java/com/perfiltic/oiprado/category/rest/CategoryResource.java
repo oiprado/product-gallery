@@ -9,6 +9,8 @@ import com.perfiltic.oiprado.category.domain.Category;
 import com.perfiltic.oiprado.category.service.CategoryService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +22,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/category-managment")
 @RestController
 public class CategoryResource {
-    
+
     @Autowired
     private CategoryService categoryService;
-    
+
     @RequestMapping(method = RequestMethod.GET)
-    public List<Category> getCategories() {
-        return categoryService.getCategories();
+    public ResponseEntity<com.perfiltic.oiprado.category.dto.Category> getCategories() {
+        return new ResponseEntity(categoryService.getCategories(), HttpStatus.OK);
     }
-    
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity create() {
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity update() {
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity delete() {
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
 }
