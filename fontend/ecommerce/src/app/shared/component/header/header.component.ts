@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
 
     this._CategoryService.getCategoryList().subscribe((response: any) => {
       this.categories = response;
-    })
+    });
   }
 
   navigate(categoryId: number) {
@@ -66,7 +66,8 @@ export class HeaderComponent implements OnInit {
     this._TokenService.authenticated = false;
     this.model.password = "";
     sessionStorage.setItem("access_token", null);
+    this._Router.navigate(['/list'], { queryParams: { page: 0, size:10, sort: "name", direction: "asc"} });
   }
 
-
+  
 }
